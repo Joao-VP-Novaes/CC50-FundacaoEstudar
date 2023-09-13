@@ -1,0 +1,48 @@
+Esse desafio consiste em construir uma pirâmide como a do jogo do Mario, porém usando
+apenas o símbolo "#". A altura da pirâmide é definida pelo usuário e pode ser um valor
+inteiro de 1 a 8.
+
+Exemplo de pirâmide de altura 8:
+
+       #
+      ##
+     ###
+    ####
+   #####
+  ######
+ #######
+########
+
+Exemplo de uma pirâmide de altura 4:
+
+   #
+  ##
+ ###
+####
+
+Exemplo de uma pirâmide de altura 1:
+
+#
+
+Resolução:
+
+1- Primeiro é construída a função "get_height()". Essa função serve para coletar um
+numeral inteiro do usuário através da função "get_int()" da biblioteca "<cs50.h>".
+"get_height()" também certifica-se de que o numeral fornecido pelo usuário esteja
+no intervalo desejado.
+
+2- Na função "main", com a altura já coletada, são declaradas duas variáveis, "decre"
+(abreviação de decremento) e "incre" (abreviação de incremento). Essas variáveis
+ajudarão na hora de imprimir as linhas.
+
+3- Um laço "for" é usado para construir as linhas. Ele construirá o número de
+linhas equivalente à altura da pirâmide.
+
+4- Dentro do laço "for" determinado na terceira etapa, outros dois laços "for" são
+utilizados, um deles usa a variável "decre" para imprimir um número cada vez menor
+de espaços " ", enquanto o outro utiliza a variável "incre" para imprimir um
+número cada vez maior dos símbolos "#".
+
+5- No final do laço "for" onde os outros dois laços estão contidos, as variáveis
+"incre" e "decre" têm seus valores alterados para que a próxima linha da pirâmide
+seja construída corretamente.

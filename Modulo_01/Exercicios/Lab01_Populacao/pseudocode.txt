@@ -1,0 +1,38 @@
+Este desafio tem como objetivo determinar em quantos anos uma população atingirá um
+determinado número de indivíduos, levando em consideração que a cada ano ela cresce
+em um terço (1/3) e diminui em um quarto (1/4) do total de indivíduos. Como bônus,
+o programa mostra o total de indivíduos ao final do período em que a população
+esteve crescendo.
+
+Exemplo de saída para uma população inicial de 20 e final de pelo menos 100 indivíduos:
+
+População inicial: 20
+População final buscada: 100
+População ao final de 20 ano(s): 104
+
+
+Exemplo de saída para uma população inicial de 100 e final de pelo menos 1000000 indivíduos:
+
+População inicial: 100
+População final buscada: 1000000
+População ao final de 115 ano(s): 1008340
+
+Resolução:
+
+1- Iniciamos o processo inicializando as variáveis "init", que representa a população inicial,
+"fin", que representa a população final, e "anos", que atua como contador dos anos necessários
+para que a população alcance o valor desejado.
+
+2- Utilizamos dois loops "do while": um para coletar o número inicial de indivíduos na
+população, assegurando que seja igual ou superior a 9; e outro para obter o número final
+desejado, garantindo que seja igual ou superior ao número inicial.
+
+3- Declaramos e inicializamos a variável "populacao", que reflete a variação no número de
+indivíduos ao longo dos anos. Em seguida, um laço "while" é empregado para aplicar o cálculo
+de crescimento populacional, incrementando o valor de "populacao" até que ele atinja ou supere
+o valor de "fin", ao mesmo tempo em que registra na variável "anos" o período necessário para
+que a população alcance a marca desejada.
+
+4- Por fim são impressos o valor inicial da população, o valor final buscado, a quantidade de
+anos para a população atingir ou ultrapassar o valor final e a quantidade exata de indivíduos
+ao final daquele período.

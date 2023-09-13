@@ -1,0 +1,48 @@
+Este desafio envolve receber o valor em dólares do troco de um usuário e, utilizando
+apenas moedas de 25, 10, 5 e 1 centavo, determinar a quantidade mínima de moedas necessárias
+para entregar o valor ao usuário. Como um bônus adicional, o programa também calcula e exibe
+as quantidades das moedas usadas no cálculo.
+
+Exemplo de saída para uma entrada de 0.41:
+
+Moedas utilizadas: 4
+Quantidade de Pennies usadas: 1
+Quantidade de Nickles usadas: 1
+Quantidade de Dimes usadas: 1
+Quantidade de Quarters usadas: 1
+
+Exemplo de saída para uma entrada de 3.88:
+
+Moedas utilizadas: 19
+Quantidade de Pennies usadas: 3
+Quantidade de Nickles usadas: 0
+Quantidade de Dimes usadas: 1
+Quantidade de Quarters usadas: 15
+
+Exemplo de saída para uma entrada de 10:
+
+Moedas utilizadas: 19
+Quantidade de Pennies usadas: 0
+Quantidade de Nickles usadas: 0
+Quantidade de Dimes usadas: 0
+Quantidade de Quarters usadas: 40
+
+Resolução:
+
+1- Primeiro, criamos a função "get_value()", a qual recebe um valor em dólares do usuário
+utilizando a função "get_float()" da biblioteca "<cs50.h>". Em seguida, multiplicamos esse
+valor por 100 para convertê-lo em centavos. Para garantir precisão, incorporamos a
+função "round()" da biblioteca "<math.h>". Além disso, "get_value()" assegura que o usuário
+inserirá um valor positivo.
+
+2- Na função "main", após coletarmos o valor do troco, declaramos uma variável que
+representa o total de moedas a serem utilizadas, juntamente com variáveis que
+representam as quantidades das moedas que serão empregadas.
+
+3- Um laço "while" com condicionais internas é empregado para reduzir gradualmente o
+maior valor possível do troco (levando em consideração as moedas disponíveis) até que
+ele atinja 0. Este loop também atualiza o total de moedas utilizadas e a quantidade
+de cada moeda empregada no cálculo.
+
+4- Por fim os dados são impressos.
+

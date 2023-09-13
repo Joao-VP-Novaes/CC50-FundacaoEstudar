@@ -1,0 +1,53 @@
+Neste desafio, o objetivo é verificar se um número de cartão fornecido pelo usuário
+é válido ou não. O número de cartão deve pertencer a uma das três marcas suportadas
+por este programa: MasterCard, Visa ou American Express. Cada uma dessas marcas
+possui suas próprias estruturas específicas:
+
+- American Express: números compostos por 15 dígitos que começam com 34 ou 37.
+- MasterCard: números compostos por 16 dígitos que iniciam com 51, 52, 53, 54 ou 55
+(embora os cartões MasterCard possam começar com outros números, este desafio se
+concentra apenas nestes).
+- Visa: números compostos por 13 ou 16 dígitos que começam com o número 4.
+
+Além de seguir as estruturas definidas acima, os números também devem atender ao
+algoritmo de Luhn para serem considerados válidos. Como um bônus adicional, este
+programa também identifica quando um número fornecido está de acordo com a
+estrutura de uma marca, mas não segue o algoritmo de Luhn.
+
+Exemplo de saída para uma entrada de 546781992566472:
+
+INVALID
+
+Exemplo de saída para uma entrada de 346781992566472:
+
+INVALID AMEX
+
+Exemplo de saída para uma entrada de 4003600000000014:
+
+VISA
+
+Resolução:
+
+1- Inicialmente, o número do cartão é obtido do usuário. Em seguida, ele é fornecido como
+parâmetro para a função 'firstValid()', que retorna um valor inteiro de 1 a 4 quando o
+número está em conformidade com as estruturas válidas de alguma das marcas suportadas, ou
+retorna 0 quando o número não se encaixa em nenhuma das estruturas válidas.
+
+2- O resultado retornado pela função 'firstValid()' é atribuído à variável 'primeValid',
+a qual é utilizada para determinar o fluxo do programa. Se 'primeValid' for igual a 0,
+o programa exibirá na tela a mensagem "INVÁLIDO", indicando que o número fornecido pelo
+usuário não está em conformidade com nenhuma das estruturas das marcas em análise.
+
+3- Caso 'primeValid' seja igual a 1, o número fornecido pelo usuário está de acordo com
+a estrutura da marca American Express. Logo, o programa fará os cálculos para verificar
+se o número também está de acordo com o algoritmo de Luhn.
+
+3- Caso 'primeValid' seja igual a 2, o número fornecido pelo usuário está de acordo com
+a estrutura da marca MasterCard. Logo, o programa fará os cálculos para verificar
+se o número também está de acordo com o algoritmo de Luhn.
+
+4- Caso 'primeValid' seja igual a 3 ou 4, o número fornecido pelo usuário está de acordo
+com a estrutura da marca Visa. Logo, o programa fará os cálculos para verificar se
+o número também está de acordo com o algoritmo de Luhn.
+
+5- Por fim o resultado dos cálculos é impresso na tela.

@@ -1,0 +1,50 @@
+Esse desafio consiste em construir duas pirâmides como as do jogo do Mario, mas apenas
+usando o símbolo "#".  A altura das pirâmides é definida pelo usuário e pode ser um
+valor inteiro de 1 a 8.
+
+Exemplo de um par de pirâmides de altura 8:
+
+       #  #
+      ##  ##
+     ###  ###
+    ####  ####
+   #####  #####
+  ######  ######
+ #######  #######
+########  ########
+
+Exemplo de um par de pirâmides de altura 4:
+
+   #  #
+  ##  ##
+ ###  ###
+####  ####
+
+Exemplo de um par de pirâmides de altura 1:
+
+#  #
+
+Resolução:
+
+1- Primeiro um loop "do while" é utlizado para coletar um numeral inteiro do
+usuário dentro do intervalo desejado. O numeral é armazenado na variável
+"altura".
+
+2- Duas variáveis são declaradas: "incre" (abreviação de incremento) e "decre"
+(abreviação de decremento). A variável "incre" é inicializada com o valor 1
+e servirá para imprimir um número cada vez maior de hashes "#" na tela,
+enquanto a variável "decre" é inicializada com o valor "altura - 1" para
+imprimir um valor cada vez menor de espaços " " na tela.
+
+3- Um laço "for" é usado para construir as linhas. Ele construirá o número de
+linhas equivalente à altura das pirâmides.
+
+4- Dentro do laço "for" determinado na terceira etapa, três laços "for" são
+utilizados. O primeiro usa a variável "decre" para imprimir a quantidade
+desejada de espaços " " enquanto o segundo e o terceiro utilizam a variável
+"incre" para imprimir a quantidade de hashes "#" desejada. Para construir o
+espaço vazio entre as duas pirâmides, a função "printf()" é utilizada.
+
+5- No final do laço "for" onde os outros três laços estão contidos, as variáveis
+"incre" e "decre" têm seus valores alterados para que a próxima linha da pirâmide
+seja construída corretamente.
