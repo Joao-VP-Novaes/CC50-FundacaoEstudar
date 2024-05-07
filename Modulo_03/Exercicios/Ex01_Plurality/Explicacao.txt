@@ -1,0 +1,50 @@
+Este desafio consiste em terminar a implementação de um programa cuja função é simular uma
+votação por pluralidade, onde cada eleitor pode votar em um candidato. No final da eleição,
+o candidato que obtiver o maior número de votos é declarado vencedor da eleição. Como uma
+funcionalidade bônus, quando um voto inválido é fornecido, o programa não conta aquele voto
+e continua pedindo o nome de um dos candidatos até que um válido seja fornecido.
+
+Exemplo de saída para a seguinte execução:
+    ./plurality
+
+Uso: ./plurality [candidato ...]
+
+Exemplo de saída para a seguinte execução:
+    ./plurality Alice Bob
+
+Número de eleitores: 3
+Vote: Alice
+Vote: Bob
+Vote: Alice
+Vencedor(es):
+
+Alice
+
+Exemplo de saída para a seguinte execução:
+    ./plurality Alice Bob
+
+Número de eleitores: 3
+Vote: Alice
+Vote: Charlie
+Voto inválido.
+Vote: Bob
+Vote: Alice
+Alice
+
+Resolução:
+
+1- Com a maior parte do código já fornecida, foi implementada a função "vote()",
+a qual percorre o array de candidatos e adiciona 1 ao candidato cujo nome foi
+passado por parâmetro, caso ele esteja de fato no array.
+
+2- Na função "print_winner()", um laço "for" é utilizado para percorrer o array de
+candidatos e encontrar o maior número que um (ou mais) candidato(s) teve (ou tiveram)
+de votos. Após a identificação desse número, ele é armazenado na variável "bigNum".
+
+3- Ainda na função "print_winner()", outro laço "for" é utilizado para percorrer
+novamente o array de candidatos e exibir todos aqueles que tiveram uma quantidade de
+votos equivalente a "bigNum".
+
+4- Na função "main()", dentro do laço "for" que coleta os votos dos eleitores, a
+condicional "if()" foi substituída por um laço "while()" para que os votos inválidos
+não sejam contados.

@@ -1,0 +1,149 @@
+Compilação
+    Compilar o código-fonte em código de máquina é, na verdade, feito em etapas menores:
+        * pré-processamento:
+            O pré-processamento geralmente envolve linhas que começam com #, como #include. Por exemplo,
+            #include <cs50.h> dirá ao clang, o compilador de código C usado durante o curso para procurar por
+            esse arquivo de cabeçalho, pois ele contém o conteúdo que queremos incluir em nosso programa.
+            Então, o clang irá essencialmente substituir o conteúdo desses arquivos de cabeçalho em nosso
+            programa. Por exemplo…
+
+            #include <cs50.h>
+            #include <stdio.h>
+
+            int main(void)
+            {
+                string nome = get_string("Qual o seu nome?");
+                printf("oi, %s\n", nome);
+            }
+
+            ... será pré-processado em:
+
+            ...
+            string get_string(string prompt);
+            int printf(string format, ...);
+            ...
+
+            Isso inclui os protótipos de todas as funções dessas bibliotecas que incluímos, para que possamos usá-las
+            em nosso código.
+
+        * compilação:
+            Pega nosso código-fonte, em C, e o converte em outro tipo de código-fonte chamado código assembly, que se
+            parece com isto:
+
+            ...
+            main:                         # @main
+                .cfi_startproc
+            # BB#0:
+                pushq    %rbp
+            .Ltmp0:
+                .cfi_def_cfa_offset 16
+            .Ltmp1:
+                .cfi_offset %rbp, -16
+                movq    %rsp, %rbp
+            .Ltmp2:
+                .cfi_def_cfa_register %rbp
+                subq    $16, %rsp
+                xorl    %eax, %eax
+                movl    %eax, %edi
+                movabsq    $.L.str, %rsi
+                movb    $0, %al
+                callq    get_string
+                movabsq    $.L.str.1, %rdi
+                movq    %rax, -8(%rbp)
+                movq    -8(%rbp), %rsi
+                movb    $0, %al
+                callq    printf
+                ...
+
+            Essas instruções são de nível inferior e estão mais próximas das instruções binárias que o processador de
+            um computador pode entender diretamente. Eles geralmente operam nos próprios bytes, em oposição a
+            abstrações como nomes de variáveis.
+
+        * montagem:
+            Esta etapa envolve pegar o código do assembly e traduzi-lo em instruções em binário, montando-o. As
+            instruções em binário são chamadas de código de máquina, que a CPU de um computador pode executar
+            diretamente.
+
+        * linkagem/vinculação:
+            A última etapa. Nesta etapa, versões previamente compiladas de bibliotecas que incluímos anteriormente são
+            realmente combinadas com o binário de nosso programa. Portanto, terminamos com um arquivo binário, que é o
+            código de máquina
+
+Debugging/Depuração
+    Bugs são erros ou problemas em programas que fazem com que eles se comportem de maneira diferente do pretendido. E
+    o debugging (ou depuração) é o processo de localização e correção desses bugs.
+
+    Além de ferramentas disponiblizadas pelas IDEs que utilizamos, também podemos usar ddb, abreviação de “duck debugger”,
+    uma técnica real em que explicamos o que estamos tentando fazer com um pato de borracha e, muitas vezes, percebemos
+    nosso próprio erro de lógica ou implementação conforme o explicamos.
+
+Memória
+    Em C, temos diferentes tipos de variáveis ​​que podemos usar para armazenar dados, e cada uma delas ocupa uma quantidade
+    fixa de espaço. Na verdade, diferentes sistemas de computador variam na quantidade de espaço realmente usado para cada
+    tipo, mas aqui consideraremos:
+        bool 1 byte
+        char 1 byte
+        float 4 bytes
+        double 8 bytes
+        int 4 bytes
+        long 8 bytes
+
+    Dentro de nossos computadores, temos chips chamados RAM, memória de acesso aleatório , que armazena dados para uso de
+    curto prazo, como o código de um programa enquanto está sendo executado ou um arquivo enquanto está aberto. Podemos
+    salvar um programa ou arquivo em nosso disco rígido (ou SSD, unidade de estado sólido) para armazenamento de longo
+    prazo, mas usamos RAM porque é muito mais rápido. No entanto, a RAM é volátil, ou requer energia para manter os dados
+    armazenados.
+
+    Podemos pensar nos bytes armazenados na RAM como se estivessem em uma grade:
+
+        ####
+        ####
+        ####
+        ####
+        ####
+
+        * Na realidade, existem milhões ou bilhões de bytes por chip.
+        * Cada byte terá um local no chip, como o primeiro byte, o segundo byte e assim por diante.
+
+    Em C, quando criamos uma variável do tipo char, que terá o tamanho de um byte, ela será armazenada fisicamente em uma
+    dessas caixas na RAM. Um inteiro, com 4 bytes, ocupará quatro dessas caixas.
+
+Arrays/Vetores
+    Acontece que, na memória, podemos armazenar variáveis ​​uma após a outra, consecutivamente, e acessá-las mais facilmente
+    com loops. Em C, uma lista de valores armazenados um após o outro de forma contígua é chamada de array (uma espécie de
+    matriz).
+
+    Podemos usar pontuações "int scores[3];" para declarar uma matriz de três inteiros, por exemplo.
+
+    E podemos atribuir e usar variáveis ​​em uma matriz com "scores[0] = 72". Com os colchetes, estamos indexando ou indo
+    para a posição “0” na matriz. As matrizes são indexadas por zero, o que significa que o primeiro valor tem índice 0
+    e o segundo valor tem índice 1 e assim por diante.
+
+Caracteres
+    Supondo que temos uma variável do tipo char chamada "letra" e seu valor é '#', se tentarmos imprimi-la em um printf
+    com formatação de caractere, seu valor será impresso normalmente, mas se usarmos a formatação que imprime um
+    inteiro, será impresso o valor 35. Isso acontece porque quando imprimimos um caractere na formatação de inteiro, o
+    que é levado em conta é o seu valor da tabela ASCII.
+
+Strings
+    Strings são, na verdade, apenas matrizes (ou sequências) de caracteres. E acontece que uma string termina com um
+    caractere especial, '\0', ou um byte com todos os bits definidos como 0. Esse caractere é chamado de caractere nulo
+    ou NUL. Então, na verdade, precisaríamos de quatro bytes para armazenar uma string com três caracteres, por exemplo.
+
+Argumentos de linha de comando
+    Os nossos próprios programas também podem aceitar argumentos de linha de comando ou palavras adicionadas após o nome
+    do nosso programa no próprio comando.
+
+    Na linha abaixo, argc representa o número de argumentos passados na execução do programa, enquanto argv[] é um array
+    contendo cada argumento passado:
+
+        int main(int argc, string argv[])
+
+    Nossa função main também retorna um valor inteiro. Por padrão, nossa função main retorna 0 para indicar que nada
+    deu errado, mas podemos escrever um programa para retornar um valor diferente.
+
+    O valor de retorno de main em nosso programa é chamado de código de saída, geralmente usado para indicar códigos
+    de erro.
+
+    Conforme escrevemos programas mais complexos, códigos de erro podem nos ajudar a determinar o que deu errado,
+    mesmo que não seja visível ou significativo para o usuário.

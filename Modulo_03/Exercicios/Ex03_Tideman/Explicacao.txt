@@ -1,0 +1,110 @@
+Este desafio consiste em terminar a implementação de um código que simula uma votação por
+escolha ranqueada, em que cada eleitor pode votar em cada um dos candidatos por ordem de
+sua preferência. No final, é exibido, se houver, o "vencedor Condorcet" da eleição: a
+pessoa que teria vencido qualquer confronto direto com outro candidato.
+
+Exemplo de saída para a seguinte execução:
+    ./tideman
+
+Uso: ./tideman [candidato ...]
+
+Exemplo de saída para a seguinte execução:
+    ./tideman Alice Bob Charlie Diego Enrico Francis Gerald Heron Ian Jhon
+
+O número máximo de candidatos é: 9
+
+Exemplo de saída para a seguinte execução:
+    ./tideman Alice Bob Charlie
+
+Número de eleitores: 101
+Rank 1: Rafael
+Voto inválido.
+
+Exemplo de saída para a seguinte execução:
+    ./tideman Alice Bob Charlie
+
+Número de eleitores: 3
+Rank 1: Alice
+Rank 2: Bob
+Rank 3: Charlie
+
+Rank 1: Bob
+Rank 2: Charlie
+Rank 3: Alice
+
+Rank 1: Charlie
+Rank 2: Alice
+Rank 3: Bob
+
+
+
+Exemplo de saída para a seguinte execução:
+    ./tideman Alice Bob Charlie
+
+Número de eleitores: 9
+Rank 1: Alice
+Rank 2: Bob
+Rank 3: Charlie
+
+Rank 1: Alice
+Rank 2: Charlie
+Rank 3: Bob
+
+Rank 1: Bob
+Rank 2: Alice
+Rank 3: Charlie
+
+Rank 1: Bob
+Rank 2: Alice
+Rank 3: Charlie
+
+Rank 1: Bob
+Rank 2: Alice
+Rank 3: Charlie
+
+Rank 1: Charlie
+Rank 2: Alice
+Rank 3: Bob
+
+Rank 1: Charlie
+Rank 2: Alice
+Rank 3: Bob
+
+Rank 1: Charlie
+Rank 2: Alice
+Rank 3: Bob
+
+Rank 1: Charlie
+Rank 2: Bob
+Rank 3: Alice
+
+Alice
+
+Resolução:
+
+1- Com grande parte do código já fornecida, foi terminada a implementação da função "vote()".
+Essa função recebe por parâmetro o rank para o qual aquele voto será contado, o nome de um
+candidato e um array que armazena todos os votos de um candidato. A função verifica se o nome
+do candidato fornecido por parâmetro é válido e caso seja, o array "ranks[]" é atualizado na
+posição devida com o índice daquele candidato.
+
+2- A função "record_preferences()" recebe o array com os votos de um eleitor e atualiza o
+array bidimensional "preferences[][]" com base nas preferências deste eleitor.
+
+3- Na função "add_pairs()", o array bidimensional "preferences[][]" é percorrido para saber
+entre dois candidatos quem é o vencedor. O vencedor e o perdedor são então armazenados como
+um par no array de pares "pairs[]" e a variável pair_count, que representa o número de pares
+de candidatos com um vencedor e um perdedor é incrementada.
+
+4- A função "sort_pairs()" descobre a força de um par com base no número de pessoas que preferem
+o vencedor ao perdedor desse par, e então ordena o array "pairs[]" em ordem decrescente de
+força de vitória utilizando o algoritmo de ordenação "Bubble Sort".
+
+5- O objetivo da função "lock_pairs()" é criar a ideia de um grafo onde há setas que apontam
+do vencedor para o perdedor de um par de forma a não criar ciclos. Para isso foi construída
+uma função chamada "cycle_check()" que utiliza recursividade para verificar se a adição de uma
+seta criará um ciclo no grafo. Para cada par uma seta é criada a menos que esta seta crie um ciclo.
+
+6- Por fim, a função "print_winner()" percorre o array bidimensional "locked[][]", onde cada
+elemento representa a existência de uma seta no grafo, e exibe o vencedor da eleição, que é
+aquele candidato que não possui setas apontando para ele.

@@ -1,0 +1,308 @@
+Busca/Searching
+    Com matrizes, um computador não pode olhar para todos os elementos de uma vez. Em vez disso, um computador só
+    pode olhar para eles um de cada vez, embora a ordem possa ser arbitrária. (Na semana 0, David só conseguia olhar
+    uma página de cada vez na lista telefônica, quer folheasse em ordem ou de maneira mais sofisticada).
+
+    Searching (“busca”) é como resolvemos o problema de encontrar um valor específico. Um caso simples pode ter como
+    input algum array de valores, e a saída pode ser simplesmente um bool, esteja ou não um determinado valor no array.
+
+Pesquisa linear, pesquisa binária
+    Supondo que temos algumas portas de mentira, com números escondidos atrás delas. Como um computador só pode olhar
+    para um elemento de cada vez em um array, só podemos abrir uma porta de cada vez.
+
+    Se quisermos procurar o número zero, por exemplo, teríamos que abrir uma porta por vez, e se não soubéssemos nada
+    sobre os números atrás das portas, o algoritmo mais simples seria ir da esquerda para a direita.
+
+    Então, podemos escrever pseudocódigo para busca linear com:
+
+        For i from 0 to n–1
+            If number behind i'th door
+                Return true
+        Return false
+
+        * Rotulamos cada uma das n portas de 0 a n – 1 e verificamos cada uma delas em ordem.
+        * “Return false” está fora do for loop, já que só queremos fazer isso depois de olharmos por trás de
+          todas as portas.
+        * O big O(o limite superior do número de etapas ou o pior caso) para este algoritmo seria O(n), e o limite
+        inferior, big Ω, seria Ω(1).
+
+    Se soubermos que os números atrás das portas estão classificados, podemos começar pelo meio e encontrar nosso
+    valor com mais eficiência.
+
+    Para busca binária, nosso algoritmo pode ser semelhante a:
+
+        If no doors
+            Return false
+        If number behind middle door
+            Return true
+        Else if number < middle door
+            Search left half
+        Else if number > middle door
+            Search right half
+
+        * O limite superior da pesquisa binária é O(log ⁡ n), e o limite inferior também Ω(1), se o número que
+          procuramos estiver no meio, onde começamos.
+
+    A velocidade de um processador pode ser medida em gigahertz, ou bilhões de operações por segundo.
+
+Realizando a busca em código
+    Este é o código de numbers.c:
+
+        #include <cs50.h>
+        #include <stdio.h>
+
+        int main(void)
+        {
+            int numbers[] = {4, 6, 8, 2, 7, 5, 0};
+
+            for (int i = 0; i < 7; i++)
+            {
+                if (numbers[i] == 0)
+                {
+                    printf("Found\n");
+                    return 0;
+                }
+            }
+            printf("Not found\n");
+            return 1;
+        }
+
+       * Caso seja encontrado valor zero, é retornado um código de saída 0 (para indicar sucesso). Caso contrário,
+       após o loop for, a função retorna 1 (para indicar falha).
+
+Structs
+    Para implementar um programa que pesquisa uma lista telefônica, é possível utilizar um tipo de dado para uma
+    “pessoa”, com seu nome e número de telefone.
+
+    Em C pode-se definir um tipo de dados, ou data structure (“estrutura de dados”), com um struct na seguinte sintaxe:
+
+        typedef struct
+        {
+            string name;
+            string number;
+        }
+        person;
+
+        * Usa-se string para o number, pois pretende-se incluir símbolos e formatação, como sinais de mais ou hifens.
+        * Esta estrutura contém outros tipos de dados dentro dela.
+
+     Implementar essa lista telefônica sem structs seria algo assim:
+
+        #include <cs50.h>
+        #include <stdio.h>
+        #include <string.h>
+
+        int main(void)
+        {
+            string names[] = {"Brian", "David"};
+            string numbers[] = {"+1-617-495-1000", "+1-949-468-2750"};
+            for (int i = 0; i < 2; i++)
+            {
+                if (strcmp(names[i], "David") == 0)
+                {
+                    printf("Encontrado %s\n", numbers[i]);
+                    return 0;
+                }
+            }
+            printf("Nao encontrado\n");
+            return 1;
+        }
+
+            * É preciso ter cuidado para garantir que o primeiro nome nos names[] corresponda ao primeiro
+              número em numbers[] e assim por diante.
+            * Se o nome em um determinado índice i na matriz de names[] corresponder ao que está sendo procurado,
+              é possível retornar o número de telefone em numbers[] no mesmo índice.
+
+    Com structs, tem-se um pouco mais de certeza de que não ocorrerá erros humanos neste programa:
+
+        #include <cs50.h>
+        #include <stdio.h>
+        #include <string.h>
+
+        typedef struct
+        {
+            string name;
+            string number;
+        }
+        person;
+
+        int main(void)
+        {
+            person people[2];
+            people[0].name = "Brian";
+            people[0].number = "+1-617-495-1000";
+            people[1].name = "David";
+            people[1].number = "+1-949-468-2750";
+
+            for (int i = 0; i < 2; i++)
+            {
+                if (strcmp(people[i].name, "David") == 0)
+                {
+                    printf("Encontrado %s\n", people[i].number); return 0;
+                }
+            }
+            printf("Não encontrado\n");
+            return 1;
+        }
+
+        * Cria-se uma matriz do tipo "struct person" e a atribui-lhe o nome "people" (como em int numbers[] , embora
+          seja possível nomeá-la arbitrariamente, como qualquer outra variável). Define-se os valores para cada campo,
+          ou variável, dentro de cada estrutura de person, usando o operador ponto(.).
+        * No loop, agora pode-se ter mais certeza de que o number(número) corresponde ao name(nome), pois eles são da
+          mesma estrutura: person.
+
+Ordenação
+    Se nossa entrada for uma lista não ordenada de números, existem muitos algoritmos que podemos usar para produzir um
+    output de uma lista classificada, onde todos os elementos estão em ordem.
+
+    Embora, com uma lista ordenada, possamos aproveitar a pesquisa binária pela sua eficiência, às vezes pode demandar
+    um longo tempo para desenvolver este algoritmo mais eficiente devido à sua lógica complexa. Então às vezes teremos
+    que colocar em diferentes lados de uma balança o tempo necessário para implementar um algoritmo e o tempo necessário
+    para o computador executá-lo.
+
+Ordenação de seleção
+    No algoritmo selection sort, estes seriam os seus pseudocódigos:
+
+        * Para i de 0 a n–1
+        * Encontre o menor item entre i-ésimo item e último
+        * Troque o menor item com i-ésimo item
+
+        * A primeira etapa do loop é procurar o menor item na parte não ordenada da lista, que estará entre o i'ésimo item
+          e o último item, pois sabe-se que foi classificado até o "n-1º" item.
+        * Em seguida, é trocado o menor item pelo i'ésimo item, o que compõe tudo até o item que foi classificado.
+
+Bubble sort
+    Um outro algoritmo de ordenação em que trocamos pares de números repetidamente até que a lista esteja ordenada é chamado
+    de bubble sort.
+
+    O algoritmo vai olhar para os dois primeiros números do array e trocá-los para que fiquem em ordem:
+
+        6 3 8 5 2 7 4 1
+        - -
+        3 6 8 5 2 7 4 1
+
+    O próximo par, 6 e 8 , está em ordem, então não é necessário trocá-los.
+    O próximo par, 8 e 5 , precisa ser trocado:
+
+        3 6 8 5 2 7 4 1
+        - -
+        3 6 5 8 2 7 4 1
+
+    O algoritmo continua até chegar ao final da lista:
+
+        3 6 5 2 8 7 4 1
+        - -
+        3 6 5 2 7 8 4 1
+        - -
+        3 6 5 2 7 4 8 1
+        - -
+        3 6 5 2 7 4 1 8
+
+    A lista ainda não foi ordenada, mas estamos um pouco mais próximos da solução porque o maior valor, 8 ,
+    foi deslocado totalmente para a direita. E outros números maiores também se moveram para a direita, ou “bubbled up”.
+
+    O algoritmo fará outra passagem pela lista, ao final da qual teremos:
+
+        3 5 2 6 4 1 7 8
+
+    O algoritmo repetirá esse processo mais algumas vezes e cada vez mais a lista será ordenada, até que tenhamos uma
+    lista totalmente ordenada.
+
+    O pseudocódigo para bubble sort pode ser parecido com:
+
+        Repita até estar ordenado
+            Para i de 0 a n–2
+            Se iºésimo and i+1ºésimo elemento fora de ordem
+                Troque eles
+
+    * Uma vez que estamos comparando o i'ésimo e i + 1'ésimo elemento, só precisamos ir até n – 2 para i . Em seguida,
+      trocamos os dois elementos se eles estiverem fora de ordem.
+    * E podemos parar assim que a lista for ordenada, já que podemos apenas lembrar se fizemos alguma troca. Caso não
+      tenhamos feito, a lista já deve estar ordenada.
+
+Recursão
+    Recursão é a capacidade de uma função chamar a si mesma.
+
+    Este é um pseudocode que utiliza loops em seu corpo:
+
+        1 Pegue a lista telefônica
+        2 Abra no meio da lista telefônica
+        3 Olhe para a página
+        4 Se Smith estiver na página
+        5    Ligue para Mike
+        6 Caso contrário, se Smith estiver no início do livro
+        7    Aberto no meio da metade esquerda do livro
+        8    Volte para a linha 3
+        9 Caso contrário, se Smith estiver mais tarde no livro
+        10   Aberto no meio da metade direita do livro
+        11   Volte para a linha 3
+        12 Senão
+        13   Desistir
+
+    Esta é uma versão do pseudocode que utiliza recursividade:
+
+        1 Pegue a lista telefônica
+        2 Abra no meio da lista telefônica
+        3 Olhe para a página
+        4 Se Smith estiver na página
+        5    Ligue para Mike
+        6 Caso contrário, se Smith estiver no início do livro
+        7    Pesquise na metade esquerda do livro
+        8
+        9 Caso contrário, se Smith estiver mais tarde no livro
+        10   Pesquise a metade direita do livro
+        11
+        12 Senão
+        13   Desistir
+
+        * Parece um processo cíclico que nunca termina, mas na verdade estamos mudando a entrada para a função e
+          dividindo o problema pela metade a cada vez, parando assim que não houver mais livro sobrando.
+
+Merge sort
+    O algoritmo chamado merge sort leva a ideia de recursão para classificação. O pseudocódigo pode ser semelhante a:
+
+        Se apenas um número
+            Retornar
+        Senão
+            Ordenar a metade esquerda do número
+            Ordenar a metade direita do número
+        Mesclar metades classificadas
+
+    Veremos isso melhor na prática com duas listas classificadas:
+
+        3 5 6 8 | 1 2 4 7
+
+    Vamos mesclar as duas listas para uma lista final classificada, pegando o menor elemento na frente de cada
+    lista, um de cada vez:
+
+        3 5 6 8 | _ 2 4 7
+        1
+
+    O 1 no lado direito é o menor entre 1 e 3, então podemos começar nossa lista ordenada com ele.
+
+        3 5 6 8 | _ _ 4 7
+        1 2
+
+    O próximo menor número, entre 2 e 3, é 2, então usamos o 2.
+
+        _ 5 6 8 | _ _ 4 7
+        1 2 3
+
+        _ 5 6 8 | _ _ _ 7
+        1 2 3 4
+
+        _ _ 6 8 | _ _ _ 7
+        1 2 3 4 5
+
+        _ _ _ 8 | _ _ _ 7
+        1 2 3 4 5 6
+
+        _ _ _ 8 | _ _ _ _
+        1 2 3 4 5 6 7
+
+        _ _ _ _ | _ _ _ _
+        1 2 3 4 5 6 7 8
+
+    Agora temos uma lista completamente ordenada.
+
+

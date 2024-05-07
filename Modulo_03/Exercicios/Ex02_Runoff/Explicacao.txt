@@ -1,0 +1,114 @@
+Este desafio consiste em terminar a implementação de um código que simula uma votação por
+escolha ranqueada, em que cada eleitor pode votar em cada um dos candidatos por ordem de
+sua preferência. A votação acontece em turnos, onde os candidatos com menos votos são
+eliminados e os eleitores que votaram nestes têm suas opções de menor rank levadas em
+conta. Um candidato ganha se atingir mais da metade dos votos. Um empate acontece se
+todos os candidatos ainda não eliminados tiverem a mesma quantidade de votos.
+
+Exemplo de saída para a seguinte execução:
+    ./runoff
+
+Uso: ./runoff [candidato ...]
+
+
+Exemplo de saída para a seguinte execução:
+    ./runoff Alice Bob Charlie Diego Enrico Francis Gerald Heron Ian Jhon
+
+O número máximo de candidatos é: 9
+
+Exemplo de saída para a seguinte execução:
+    ./runoff Alice Bob Charlie
+
+Número de eleitores: 100
+Rank 1: Rafael
+Voto inválido.
+
+Exemplo de saída para a seguinte execução:
+    ./runoff Alice Bob Charlie
+
+Número de eleitores: 101
+O número máximo de eleitores pe: 100
+
+Exemplo de saída para a seguinte execução:
+    ./runoff Alice Bob Charlie
+
+Número de eleitores: 5
+Rank 1: Alice
+Rank 2: Charlie
+Rank 3: Bob
+
+Rank 1: Alice
+Rank 2: Charlie
+Rank 3: Bob
+
+Rank 1: Bob
+Rank 2: Charlie
+Rank 3: Alice
+
+Rank 1: Bob
+Rank 2: Charlie
+Rank 3: Alice
+
+Rank 1: Charlie
+Rank 2: Alice
+Rank 3: Bob
+
+Alice
+
+Exemplo de saída para a seguinte execução:
+    ./runoff Alice Bob Charlie
+
+Número de eleitores: 4
+Rank 1: Alice
+Rank 2: Bob
+Rank 3: Charlie
+
+Rank 1: Bob
+Rank 2: Alice
+Rank 3: Charlie
+
+Rank 1: Alice
+Rank 2: Bob
+Rank 3: Charlie
+
+Rank 1: Bob
+Rank 2: Alice
+Rank 3: Charlie
+
+Alice
+Bob
+
+Resolução:
+
+1- Com grande parte do código já fornecida, foi terminada a implementação da
+função "vote()". Essa função recebe por parâmetro um número que representa o
+eleitor, um número que representa o rank para o qual aquele eleitor irá votar,
+e um nome, que representa o candiadto para o qual aquele eleitor vai dar o seu
+voto. Caso o nome do candidato fornecido por parâmetro seja válido e caso não
+haja votos repetidos por parte daquele eleitor, o array das preferências é
+atualizado e o programa continua sua execução.
+
+2- O objetivo da função "tabulate()" é percorrer o array "preferences" utilizando
+dois laços "for" encadeados e caso o respectivo candidato que esteja na posição
+verificada não esteja eliminado, ele tem a sua contagem de votos atualizada.
+
+3- Na função "print_winner()", é inicializada a variável "vencedores" com valor
+igual a 0, então um laço "for" é utilizado para percorrer o array de candidatos
+e verificar se um ou mais possuem um número de votos maior do que a metade do
+número de eleitores. Caso algum candidato tenha aintigido o número de votos
+necessário para vencer a eleição, seu nome é exibido na tela, a variável
+"vencedores" tem seu valor incrementado e a função retorna "true".
+
+4- A função "find_min()" inicia com a declaração da variável "min", que
+corresponde, inicialmente, ao maior número possível de votos que um candidato
+pode alcançar. O valor da variável é então alterado à medida que um laço "for"
+é utilizado para percorrer o array de candidatos e encontrar o menor número de
+votos que um candidato não eliminado teve. A função então retorna o valor da
+variável "min".
+
+5- A função "is_tie()" recebe por parâmetro um inteiro que corresponde ao menor
+número de votos que um candidato teve e, percorrendo o array de candidatos,
+verifica se o resultado da eleição foi um empate.
+
+6- A função "eliminate()", por fim, altera o status do atributo "eliminated" dos
+candidatos que, neste turno, tiveram o menor número de votos para "false".

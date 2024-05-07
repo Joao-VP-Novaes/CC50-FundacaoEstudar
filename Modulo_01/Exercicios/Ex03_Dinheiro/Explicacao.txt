@@ -29,7 +29,7 @@ Quantidade de Quarters usadas: 40
 
 Resolução:
 
-1- Primeiro, criamos a função "get_value()", a qual recebe um valor em dólares do usuário
+1- Primeiro criamos a função "get_value()", a qual recebe um valor em dólares do usuário
 utilizando a função "get_float()" da biblioteca "<cs50.h>". Em seguida, multiplicamos esse
 valor por 100 para convertê-lo em centavos. Para garantir precisão, incorporamos a
 função "round()" da biblioteca "<math.h>". Além disso, "get_value()" assegura que o usuário

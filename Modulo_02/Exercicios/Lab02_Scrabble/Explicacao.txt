@@ -1,0 +1,61 @@
+O desafio deste Lab consiste na implementação de um programa que deve
+exibir o vencedor de um jogo de Scrabble. Neste jogo, dois jogadores
+fornecem, cada um, uma palavra e a pontuação que cada um vai receber
+depende das letras que formam essas palavras. Como um adicional, o
+programa informa quantos pontos cada jogador fez.
+
+A pontuação de cada letra pode ser conferida na tabela a seguir, a
+pontuação não varia de letras minúsculas para maiúsculas:
+
+A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P |  Q  | R | S | T | U | V | W | X | Y | Z
+1 | 3 | 3 | 2 | 1 | 4 | 2 | 4 | 1 | 8 | 5 | 1 | 3 | 1 | 1 | 3 |  10 | 1 | 1 | 1 | 1 | 4 | 4 | 8 | 4 | 10
+
+Exemplo de saída para a seguinte execução:
+
+Jogador 1: COMPUTER
+Jogador 2: science
+
+Jogador 1: 14 pontos
+Jogador 2: 11 pontos
+
+O jogador 1 venceu !
+
+Exemplo de saída para a seguinte execução:
+
+Jogador 1: Question?
+Jogador 2: Question!
+
+Jogador 1: 17 pontos.
+Jogador 2: 17 pontos.
+
+Empate !
+
+Exemplo de saída para a seguinte execução:
+
+Jogador 1: Oh,
+Jogador 2: hai!
+
+Jogador 1: 5 pontos.
+Jogador 2: 6 pontos.
+
+O jogador 2 venceu !
+
+
+Resolução:
+
+1- Foi utilizado o código disponibilizado para a questão, nele já
+estavam inclusas as bibliotecas necessárias, o array de inteiros
+que representa a pontuação de cada letra, o protótipo da função
+"compute_score()", o código para receber as palavras dos usuários,
+a chamada da função "compute_score()" recebendo as palavras dos
+usuários como parâmetro e a base para a implementação da função
+"compute_score()".
+
+2- Com a base já pronta, a função "compute_score()" teve sua
+implementação finalizada para que fosse possível saber o total de
+pontos das palavras dos jogadores.
+
+3- Por fim, é exibido quantos pontos fizeram cada um dos jogadores
+e um bloco de condicionais aninhadas é utilizado para exibir o
+resultado do jogo.
+

@@ -1,0 +1,145 @@
+C
+    Ao escrever o código, podemos considerar as seguintes qualidades:
+        * Correção, ou se nosso código funciona corretamente, conforme planejado.
+        * Design, ou uma medida subjetiva de quão bem escrito nosso código é, com base em quão eficiente, elegante ou
+          logicamente legível ele é, sem repetição desnecessária.
+        * Estilo, ou o quão esteticamente formatado nosso código é, em termos de indentação consistente e outra
+          colocação de símbolos. As diferenças de estilo não afetam a exatidão ou o significado do nosso código, mas
+          afetam o quão legível é visualmente. Por exemplo, podemos alterar nossa função principal(main) para uma linha,
+          "int main (void) {printf ("hello, world");}", mas é muito mais difícil de ler, então consideramos que tem um
+          estilo ruim.
+
+Compilação
+      Os computadores só entendem binário, que também é usado para representar instruções como imprimir algo na tela.
+      Nosso código-fonte foi escrito em caracteres que podemos ler, mas precisa ser compilado: convertido em código de
+      máquina, padrões de zeros e uns que nosso computador possa entender diretamente.
+
+      Um programa chamado compilador pegará o código-fonte como entrada e produzirá o código de máquina como saída.
+
+Funções e argumentos
+    Funções são pequenas ações ou verbos que podemos usar em nosso programa para fazer algo, e as entradas para funções
+    são chamadas de argumentos.
+        Por exemplo, em C, a função de imprimir algo na tela é chamada de printf(com f significando texto “formatado”).
+        E em C, passamos os argumentos entre parênteses, como em "printf("hello, world");". As aspas duplas indicam que
+        queremos imprimir as letras "hello, world" literalmente, e o ponto-e-vírgula no final indica o fim de nossa
+        linha de código.
+
+    As funções também podem ter dois tipos de saídas:
+        * Efeitos colaterais, como algo impresso na tela;
+        * Valores de retorno, um valor que é passado de volta ao nosso programa que podemos usar ou armazenar para
+          mais tarde.
+
+    Usaremos uma biblioteca ou um conjunto de código já escrito. A Biblioteca CS50 incluirá algumas funções básicas e
+    simples que podemos usar imediatamente. Por exemplo, get_string pedirá ao usuário uma string, ou alguma sequência
+    de texto, e a retornará ao nosso programa. get_string recebe algum input e o usa como prompt para o usuário, como
+    “Qual é o seu nome?”, e nós teremos que salvá-lo em uma variável com:
+
+        string answer = get_string("Qual é o seu nome?");
+
+        * Em C, o “=” indica atribuição ou configuração do valor à direita para a variável à esquerda. E o programa
+          chamará a função get_string primeiro para então obter seu output.
+        * E também precisamos indicar que nossa variável chamada answer é do tipo string, então nosso programa saberá
+          interpretar os zeros e uns como texto.
+        * Finalmente, precisamos nos lembrar de adicionar um ponto-e-vírgula para encerrar nossa linha de código.
+
+    Em C, faremos isso para imprimir o conteúdo da variável answer:
+
+        printf("hello, %s", answer);
+
+        * O %s é chamado de código de formatação, o que significa apenas que queremos que a função printf substitua uma
+        variável onde está o marcador %s. E a variável que queremos usar é answer, que passamos para printf como outro
+        argumento, separado do primeiro por uma vírgula. (printf ("hello, answer")) iria literalmente imprimir
+        "hello, answer" sempre.
+
+    Depois de salvar o arquivo, precisaremos recompilar nosso programa, já que alteramos apenas o código-fonte, mas não
+    o código de máquina compilado.
+
+Função principal(main) e arquivos de cabeçalho
+    Em C, a linha "int main(void)" inicia o que consideramos ser o programa principal, seguida por uma chave aberta '{'
+    e uma chave fechada '}', envolvendo tudo o que deveria estar em nosso programa.
+
+    Arquivos de cabeçalho que terminam com .h referem-se a algum outro conjunto de código, como uma biblioteca, que
+    podemos usar em nosso programa. Nós os incluímos com linhas como #include <stdio.h> , por exemplo, para a biblioteca
+    de entrada/saída padrão, que contém a função printf.
+
+Ferramentas
+    Podemos adicionar comentários , notas em nosso código-fonte para nós mesmos ou para outras pessoas que não afetem a
+    forma como nosso código é executado. Por exemplo, podemos adicionar uma linha como "//Cumprimentar o usuário", com
+    duas barras // para indicar que a linha é um comentário e, em seguida, escrever o propósito do nosso código ou programa
+    para nos ajudar a lembrar mais tarde.
+
+Tipos e Códigos de Formato
+    Existem muitos tipos de dados que podemos usar para nossas variáveis, que indicam ao computador que tipo de dados eles
+    representam:
+        * bool, uma expressão booleana verdadeira ou falsa;
+        * char, um único caractere ASCII como 'a' ou '2';
+        * float, um valor de vírgula flutuante ou número real com um valor decimal;
+        * double, um valor de vírgula flutuante com mais dígitos do que um float;
+        * int, inteiros até um certo tamanho ou número de bits;
+        * long, inteiros com mais bits, para que possam contar mais do que um int;
+        * string, uma linha de caracteres.
+
+    Para printf, também, existem diferentes marcadores de posição para cada tipo:
+        * %c para caracteres
+        * %f para flutuadores, duplos
+        * %i para ints
+        * %li para longos
+        * %s para strings
+
+Operadores, limitações, truncamento
+    Existem vários operadores matemáticos que podemos usar também:
+        * + para adição
+        * - para subtração
+        * * para multiplicação
+        * / para divisão
+        * % para calcular o resto
+
+    Quando dividimos dois inteiros, x e y, e armazenamos o resultado na variável z, uma variável do tipo float, podemos
+    perceber que z sempre será um número inteiro, com 0 depois da vírgula, mesmo quando o resultado deveria ser um número
+    com um valor diferente de 0 após a vírgula. Isso acontece porque ao dividir dois inteiros em C, o resultado será
+    também um inteiro. Para evitar que o resultado da divisão seja truncado, ou seja, que o valor após a vírgula seja
+    perdido, fazemos um "casting", isto é, converter nossos números inteiros para float antes de dividi-los:
+
+        float z = (float)x / (float)y;
+        ou
+        float z = (float) x / y;
+
+Abstração
+    Quando definimos uma função que será chamada dentro da main, convencionalmente, implementamos o código da função
+    abaixo da main e colocamos uma linha chamada "protótipo" acima da main. Isso acontece porque o compilador lê nosso
+    código de cima para baixo e o protótipo serve para indicar ao compilador que nossa função existirá posteriormente
+    no arquivo.
+
+    A abstração aqui leva a um design melhor, já que agora temos a flexibilidade de reutilizar nossa nova função em
+    vários lugares no futuro.
+
+    O escopo de uma variável em C se refere ao contexto, ou linhas de código, dentro do qual ela existe. Em muitos
+    casos, serão as chaves ao redor da variável.
+
+Memória, imprecisão e estouro
+    Nosso computador tem memória, em chips de hardware chamados RAM, memória de acesso aleatório. Nossos programas usam
+    essa RAM para armazenar dados enquanto estão em execução, mas essa memória é finita.
+
+    Em C, caso dividamos 1 por 10 e tentemos exibir 50 casas decimais, o resultado será:
+
+        0.10000000149011611938476562500000000000000000000000
+
+        Acontece que isso é chamado de imprecisão de vírgula flutuante, em que não temos bits suficientes para armazenar
+        todos os valores possíveis. Com um número finito de bits para um float, não podemos representar todos os números
+        reais possíveis (dos quais existe um número infinito), então o computador tem que armazenar o valor mais
+        próximo que puder. E isso pode levar a problemas em que mesmo pequenas diferenças no valor se somam, a menos que
+        o programador use alguma outra maneira para representar os valores decimais com a precisão necessária.
+
+    Quando temos três bits e precisamos contar mais do que sete (ou 111), adicionamos outro bit para obter oito, 1000.
+    Mas se tivéssemos apenas três bits disponíveis, não teríamos lugar para o 1 extra . Ele desapareceria e estaríamos
+    de volta a 000. Esse problema é chamado de overflow (“vazamento”) de inteiro, pois um inteiro só pode atingir um
+    tamanho especifico antes de ficar sem bits.
+
+    O problema Y2K surgiu porque muitos programas armazenavam o ano civil com apenas dois dígitos, como 98 para 1998 e
+    99 para 1999. Mas quando o ano 2000 se aproximou, os programas tiveram que armazenar apenas 00, levando a confusão
+    entre os anos 1900 e 2000 .
+
+    Em 2038, também ficaremos sem bits para rastrear o tempo, já que há muitos anos alguns humanos decidiram usar 32 bits
+    como o número padrão de bits para contar o número de segundos desde 1º de janeiro de 1970. Mas com 32 bits representando
+    apenas números positivos, só podemos contar até cerca de quatro bilhões e, em 2038, atingiremos esse limite, a menos que
+    atualizemos o software em todos os nossos sistemas de computador.

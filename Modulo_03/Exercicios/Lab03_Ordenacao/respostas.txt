@@ -1,0 +1,14 @@
+sort1 usa: Bubble Sort
+
+Como você sabe ?: Disputa em velocidade com o sort2 quando executado com o arquivo
+de números ordenados e é bem mais rápido que o sort3;
+
+sort2 usa: Merge Sort
+
+Como você sabe ?: É o mais rápido para os número aleatórios e invertidos.
+
+sort3 usa: Selection Sort
+
+Como você sabe ?: Leva tempos parecidos para ser executado com os arquivos em ordem
+direta e invertida. Além de ser mais bem mais rápido que o sort1 quando executado com
+o arquivo de números invertidos.

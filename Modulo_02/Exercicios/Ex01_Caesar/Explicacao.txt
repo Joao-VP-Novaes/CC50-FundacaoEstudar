@@ -1,0 +1,40 @@
+Este desafio envolve a coleta de um texto fornecido pelo usuário, seguido pela criptografia
+desse texto. A criptografia ocorre ao alterar as letras com base em uma chave(número)
+fornecida pelo próprio usuário. Esse processo é semelhante ao método que Júlio César
+costumava empregar há muitos anos. No caso de o usuário não seguir as instruções
+corretamente, o programa emitirá uma mensagem de erro.
+
+Exemplo de saída para a seguinte execução:
+    ./caesar Hello, world
+
+Forma de usar: ./caesar chave
+
+Exemplo de saída para a seguinte execução:
+    ./caesar 1
+
+Texto simples: HELLO
+Texto cifrado: IFMPP
+
+Exemplo de saída para a seguinte execução:
+    ./caesar 13
+
+Texto simples: Hello, world !!
+Texto cifrado: Uryyb, jbeyq !!
+
+Resolução:
+
+1- Primeiro é construída a função "cyfer()". Essa função recebe por parâmetro
+o texto do usuário e a chave que será usada para criptografar o texto. No
+corpo dessa função, ela percorre o texto do usuário e muda as letras com base
+na chave, exibindo cada caractere, alterado ou não.
+
+2- Na função "main", é verificado se o usuário executou o programa,
+corretamente. Caso não, será mostrada uma mensagem de erro.
+
+3- A variável "key" guarda o valor da chave fornecida pelo usuário após ela
+ter sido convertida para inteiro pela função "atoi()", enquanto a variável
+"text" armazena o texto que o usuário quer criptografar.
+
+4- Por fim, a função "cyfer()" é chamada e, como parâmetros, são passadas as
+variáveis "text" e "key", resultando na exibição do texto corretamente 
+criptografado.

@@ -1,0 +1,57 @@
+Este desafio envolve a obtenção de um texto fornecido pelo usuário e a determinação do nível
+escolar (padrão dos EUA) desse texto, usando o índice de Coleman-Liau como referência. Como
+um benefício adicional, o programa também apresenta informações sobre a contagem de letras,
+palavras e frases no texto fornecido.
+
+Exemplo de saída para o seguinte texto:
+    Would you like them here or there? I would not like them here or there. I would not like
+    them anywhere.
+
+Grade: 2
+
+Número de letras: 80
+Número de palavras: 21
+Número de frases: 3
+
+Exemplo de saída para o seguinte texto:
+    A large class of computational problems involve the determination of properties of graphs,
+    digraphs, integers, arrays of integers, finite families of finite sets, boolean formulas
+    and elements of other countable domains.
+
+Grade: 16+
+
+Número de letras: 184
+Número de palavras: 31
+Número de frases: 1
+
+Exemplo de saída para o seguinte texto:
+    One fish. Two fish. Red fish. Blue fish.
+
+Grade: Antes da Grade 1.
+
+Número de letras: 29
+Número de palavras: 8
+Número de frases: 4
+
+Resolução:
+
+1- Primeiro é construída a função "findGrade()", que recebe por parâmetro
+três inteiros e, fazendo uso da fórmula do índice de Coleman-Liau, retorna
+o valor da "Grade" do texto correspondente.
+
+2- Na função "main", a variável "texto" armazena a entrada do usuário.
+
+3- Um laço "for" é usado para percorrer cada caractere do texto do usuário.
+Dependendo do caractere, ele pode adicionar +1 à variável que armazena o
+número de letras, à variável que armazena o número de palavras ou à vaiável
+que armazena o número de frases.
+
+4- A variável que armazena o número de palavras começa em 1 porque o
+programa considera que a cada espaço(" ") encontrado, existe uma palavra
+antes e uma depois desse espaço.
+
+5- A variável "grade" usa a função "findGrade()" para descobrir a "Grade"
+do texto e armazena o valor em si.
+
+6- Por fim, imprime-se a "Grade" do texto, juntamente com o total de
+letras, palavras e frases que compõem o texto.

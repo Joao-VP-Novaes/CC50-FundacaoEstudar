@@ -1,0 +1,53 @@
+Este desafio consiste em receber um texto do usuário e mudar suas letras com base
+em uma chave também fornecida pelo usuário. Essa chave contém todas as letras do
+alfabeto aparecendo uma única vez e a ordem das letras é o que determina como o
+texto do usuário será alterado. O usuário será notificado caso não execute o
+programa corretamente.
+
+Exemplo de saída para a seguinte execução:
+    ./substitution
+
+Forma de usar: ./substitution chave
+
+Exemplo de saída para a seguinte execução:
+    ./substitution JTREKYAVOGDXPSNCUIZLFBMWHJ
+
+A chave não deve conter caracteres repetidos.
+
+Exemplo de saída para a seguinte execução:
+    ./substitution JTREKYAVOGDXPSNCUIZLFBMWH2
+
+A chave deve conter apenas caracteres alfabéticos.
+
+Exemplo de saída para a seguinte execução:
+    ./substitution abc
+
+A chave deve conter 26 caracteres.
+
+Exemplo de saída para a seguinte execução:
+    ./substitution JTREKYAVOGDXPSNCUIZLFBMWHQ
+
+texto simples: HELLO
+texto cifrado: VKXXN
+
+Resolução:
+
+1- Primeiro são feitas as verificações para garantir que o usuário
+executou o programa corretamente e forneceu uma chave válida (com
+todas as letras do alfabeto e sem letras repetidas).
+
+2- Um laço "for" é utilizado para preencher o array de caracteres
+chamado "fixedKey". Esse array tem todos os caracteres da chave
+fornecida pelo usuário convertidos em maiúsculo (se necessário)
+para fins de simplicidade.
+
+3- A variável "plainText" tem como objetivo armazenar o texto que
+será criptografado. Texto esse fornecido pelo usuário.
+
+4- É construída a função "cifra()", que recebe por parâmetro um
+texto e um array de caracteres. No seu corpo, um laço "for" é
+utilizado para percorrer o texto e imprimí-lo já criptografado.
+
+5- A função "cifra()" é então chamada e "plainText" e "fixedKey"
+são passadas como parâmetros para que o texto do usuário seja
+criptografado e exibido.
